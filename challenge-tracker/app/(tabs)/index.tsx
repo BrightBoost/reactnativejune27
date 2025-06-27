@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import TaskItem from '@/components/TaskItem';
 
 export default function HomeScreen() {
   const [tasks, setTasks] = useState([
@@ -22,9 +23,7 @@ export default function HomeScreen() {
       </Text>
       <Text style={styles.title}>Challenge tracker</Text>
       {tasks.map((task) => (
-        <Pressable key={task.id} onPress={() => toggleTask(task.id)}>
-          <Text style={[styles.task, task.done && styles.taskDone]}>  {task.done ? '✅' : '⬜'} {task.title}</Text>
-        </Pressable>
+        <TaskItem key={task.id} task={task} onPress={() => toggleTask(task.id)}></TaskItem>
       ))}
     </View>
   );
@@ -43,14 +42,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 16,
     color: '#333',
-  },
-  taskDone: {
-    color: 'green',
-    fontWeight: 'bold',
-  },
-  task: {
-    fontSize: 18,
-    marginTop: 20,
   },
   container: {
     flex: 1,
